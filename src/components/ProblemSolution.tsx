@@ -1,58 +1,72 @@
 import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { AlertCircle, CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, X } from 'lucide-react';
 import './LandingPage.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export const ProblemSolution = () => {
   const containerRef = useRef(null);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    const el = containerRef.current;
-    gsap.fromTo(el,
-      { opacity: 0, y: 50 },
+    gsap.fromTo(cardsRef.current,
+      { y: 50, opacity: 0 },
       {
-        opacity: 1,
         y: 0,
-        duration: 0.8,
+        opacity: 1,
+        duration: 1,
+        stagger: 0.2,
+        ease: 'power3.out',
         scrollTrigger: {
-          trigger: el,
-          start: 'top 80%',
+            trigger: containerRef.current,
+            start: 'top 80%',
         }
       }
     );
   }, []);
 
+  const addToRefs = (el: HTMLDivElement | null) => {
+    if (el && !cardsRef.current.includes(el)) {
+        cardsRef.current.push(el);
+    }
+  };
+
   return (
-    <section className="section problem-solution-section">
-      <div className="container" ref={containerRef}>
-        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Más allá de los Likes</h2>
-          <p style={{ color: 'var(--color-text-muted)', fontSize: '1.2rem' }}>El problema de las redes tradicionales vs. Nuestra solución.</p>
+    <section className="section" ref={containerRef}>
+      <div className="container">
+        <div className="section-header">
+           <span className="section-tag">Perspectiva</span>
+           <h2 className="section-title">El Valor Real del Código</h2>
         </div>
 
-        <div className="card-grid">
-          <div className="card" style={{ borderColor: 'var(--color-danger)' }}>
-             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem', color: 'var(--color-danger)' }}>
-                <AlertCircle size={32} />
-                <h3>El Problema</h3>
+        <div className="grid-2">
+          {/* Problem Card */}
+          <div ref={addToRefs} className="glass-card" style={{ padding: '3rem', position: 'relative', overflow: 'hidden' }}>
+             <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '100px', height: '100px', background: 'radial-gradient(circle, #f85149 0%, transparent 70%)', opacity: 0.2 }}></div>
+
+             <div style={{ marginBottom: '2rem', width: '60px', height: '60px', background: 'rgba(248, 81, 73, 0.1)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#f85149' }}>
+                <X size={32} />
              </div>
-             <p style={{ fontSize: '1.1rem', color: 'var(--color-text-muted)' }}>
-               Los likes no miden tu talento. En las redes sociales tradicionales, el ruido oculta el código de calidad.
-               La popularidad superficial gana a la habilidad técnica real.
+
+             <h3 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>El Problema</h3>
+             <p style={{ color: 'var(--color-text-muted)', fontSize: '1.1rem' }}>
+               En las redes tradicionales, el ruido oculta la calidad. Los likes premian la popularidad superficial, no la arquitectura robusta o los algoritmos eficientes. Tu talento se pierde en el feed.
              </p>
           </div>
 
-          <div className="card" style={{ borderColor: 'var(--color-accent)' }}>
-             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem', color: 'var(--color-accent)' }}>
+          {/* Solution Card */}
+          <div ref={addToRefs} className="glass-card" style={{ padding: '3rem', position: 'relative', overflow: 'hidden', borderColor: 'rgba(16, 185, 129, 0.3)' }}>
+             <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '100px', height: '100px', background: 'radial-gradient(circle, var(--color-accent) 0%, transparent 70%)', opacity: 0.2 }}></div>
+
+             <div style={{ marginBottom: '2rem', width: '60px', height: '60px', background: 'rgba(16, 185, 129, 0.1)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-accent)' }}>
                 <CheckCircle2 size={32} />
-                <h3>La Solución</h3>
              </div>
-             <p style={{ fontSize: '1.1rem', color: 'var(--color-text-muted)' }}>
-               En <strong>DevStock</strong>, la comunidad invierte en tu perfil con tokens.
-               Tu valor en la bolsa refleja tu habilidad real, validada por otros desarrolladores, no solo tu popularidad.
+
+             <h3 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>La Solución</h3>
+             <p style={{ color: 'var(--color-text-muted)', fontSize: '1.1rem' }}>
+               <span style={{ color: '#fff', fontWeight: 600 }}>DevStock</span> transforma tu código en activos. La comunidad invierte tokens en tu perfil basándose en la calidad de tus aportes. Tu valor de mercado es la métrica definitiva de tu skill.
              </p>
           </div>
         </div>
