@@ -4,10 +4,13 @@ import MarketTicker from './components/MarketTicker';
 import FeaturesSection from './components/FeaturesSection';
 import GrowthJourney from './components/GrowthJourney';
 import CTASection from './components/CTASection';
+import Testimonials from './components/Testimonials';
+import Integrations from './components/Integrations';
 import './App.css';
 import { useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Github, Twitter, Linkedin } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -52,14 +55,44 @@ function App() {
       </nav>
       <main>
         <Hero />
+        <Integrations />
         <FeaturesSection />
         <EconomySection />
         <GrowthJourney />
+        <Testimonials />
         <CTASection />
       </main>
       <footer className="footer">
-        <div className="container">
-          <p>&copy; {new Date().getFullYear()} DevStock. El mercado de talento tech.</p>
+        <div className="container footer-container">
+          <div className="footer-col">
+            <h3>DevStock</h3>
+            <p>El mercado donde el código define tu valor. Únete a la revolución de la reputación técnica.</p>
+          </div>
+          <div className="footer-col">
+            <h4>Plataforma</h4>
+            <a href="#">Explorar Mercado</a>
+            <a href="#">Ranking Global</a>
+            <a href="#">Retos de Código</a>
+          </div>
+          <div className="footer-col">
+            <h4>Comunidad</h4>
+            <a href="#">Discord</a>
+            <a href="#">Blog</a>
+            <a href="#">Manifiesto</a>
+          </div>
+          <div className="footer-col">
+            <h4>Legal</h4>
+            <a href="#">Términos</a>
+            <a href="#">Privacidad</a>
+            <div className="social-links">
+              <Github size={20} />
+              <Twitter size={20} />
+              <Linkedin size={20} />
+            </div>
+          </div>
+        </div>
+        <div className="container footer-bottom">
+          <p>&copy; {new Date().getFullYear()} DevStock Inc. Todos los derechos reservados.</p>
         </div>
       </footer>
     </div>

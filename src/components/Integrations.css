@@ -1,0 +1,37 @@
+.integrations-section {
+  padding: 3rem 0;
+  border-bottom: 1px solid var(--border);
+  background-color: white;
+}
+
+.integrations-label {
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.integrations-logos {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 3rem;
+  opacity: 0.7;
+}
+
+.logo-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: var(--text-main);
+  transition: opacity 0.3s;
+}
+
+.logo-item:hover {
+  opacity: 1;
+  color: var(--accent);
+}

@@ -37,41 +37,59 @@ const GrowthJourney = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
+  const dotsRef = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Animate the vertical line filling up
-      gsap.fromTo(lineRef.current,
-        { height: "0%" },
-        {
-          height: "100%",
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top center",
-            end: "bottom center",
-            scrub: 0.5,
-          }
+      // 1. Animate the vertical line filling up
+      // We use a timeline to sync it perfectly
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top center",
+          end: "bottom center",
+          scrub: 0.5,
         }
+      });
+
+      tl.fromTo(lineRef.current,
+        { height: "0%" },
+        { height: "100%", ease: "none" }
       );
 
-      // Animate cards popping in
+      // 2. Animate Cards (Parallax + Fade In)
       cardsRef.current.forEach((card) => {
         gsap.fromTo(card,
-          { opacity: 0, y: 50, scale: 0.9 },
+          { opacity: 0, y: 100, scale: 0.9 },
           {
             opacity: 1,
             y: 0,
             scale: 1,
-            duration: 0.6,
-            ease: "back.out(1.7)",
+            duration: 0.8,
+            ease: "power4.out",
             scrollTrigger: {
               trigger: card,
-              start: "top 80%",
+              start: "top 85%",
               toggleActions: "play none none reverse"
             }
           }
         );
+      });
+
+      // 3. Animate Dots activating
+      dotsRef.current.forEach((dot) => {
+        gsap.to(dot, {
+          backgroundColor: "#2563eb", // blue-600
+          borderColor: "#2563eb",
+          scale: 1.5,
+          boxShadow: "0 0 0 4px rgba(37, 99, 235, 0.2)",
+          duration: 0.3,
+          scrollTrigger: {
+            trigger: dot,
+            start: "top 55%", // When dot hits the middle (where line is filling)
+            toggleActions: "play reverse play reverse"
+          }
+        });
       });
 
     }, sectionRef);
@@ -80,9 +98,15 @@ const GrowthJourney = () => {
   }, []);
 
   // Helper to add ref
-  const addToRefs = (el: HTMLDivElement | null) => {
+  const addCardRef = (el: HTMLDivElement | null) => {
     if (el && !cardsRef.current.includes(el)) {
       cardsRef.current.push(el);
+    }
+  };
+
+  const addDotRef = (el: HTMLDivElement | null) => {
+    if (el && !dotsRef.current.includes(el)) {
+      dotsRef.current.push(el);
     }
   };
 
@@ -100,8 +124,8 @@ const GrowthJourney = () => {
 
           <div className="journey-steps">
             {MILESTONES.map((step, index) => (
-              <div key={index} className={`journey-step ${index % 2 === 0 ? 'left' : 'right'}`} ref={addToRefs}>
-                <div className="step-content">
+              <div key={index} className={`journey-step ${index % 2 === 0 ? 'left' : 'right'}`}>
+                <div className="step-content" ref={addCardRef}>
                   <div className={`step-icon ${step.color}`}>
                     {step.icon}
                   </div>
@@ -111,7 +135,7 @@ const GrowthJourney = () => {
                   </div>
                 </div>
                 {/* Connector dot on the line */}
-                <div className="step-dot"></div>
+                <div className="step-dot" ref={addDotRef}></div>
               </div>
             ))}
           </div>
