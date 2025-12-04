@@ -1,11 +1,11 @@
-import Hero from './components/Hero';
-import EconomySection from './components/EconomySection';
-import MarketTicker from './components/MarketTicker';
-import FeaturesSection from './components/FeaturesSection';
-import GrowthJourney from './components/GrowthJourney';
-import CTASection from './components/CTASection';
-import Testimonials from './components/Testimonials';
-import Integrations from './components/Integrations';
+import Hero from './components/landingPage/Hero';
+import EconomySection from './components/landingPage/EconomySection';
+import MarketTicker from './components/landingPage/MarketTicker';
+import FeaturesSection from './components/landingPage/FeaturesSection';
+import GrowthJourney from './components/landingPage/GrowthJourney';
+import CTASection from './components/landingPage/CTASection';
+import Testimonials from './components/landingPage/Testimonials';
+import Integrations from './components/landingPage/Integrations';
 import './App.css';
 import { Github, Twitter, Linkedin } from 'lucide-react';
 
