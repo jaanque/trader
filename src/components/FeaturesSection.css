@@ -33,12 +33,6 @@
   padding: 3rem;
   border-radius: 1rem;
   border: 1px solid var(--border);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.feature-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 .feature-card.developer {

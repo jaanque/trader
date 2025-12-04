@@ -7,38 +7,9 @@ import CTASection from './components/CTASection';
 import Testimonials from './components/Testimonials';
 import Integrations from './components/Integrations';
 import './App.css';
-import { useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Github, Twitter, Linkedin } from 'lucide-react';
 
-gsap.registerPlugin(ScrollTrigger);
-
 function App() {
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Global fade-up animation for all sections
-      const sections = document.querySelectorAll('section');
-      sections.forEach(section => {
-        gsap.fromTo(section,
-          { opacity: 0, y: 50 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: section,
-              start: "top 75%",
-            }
-          }
-        );
-      });
-    });
-
-    return () => ctx.revert();
-  }, []);
-
   return (
     <div className="app">
       <MarketTicker />

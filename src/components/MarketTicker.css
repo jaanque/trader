@@ -1,23 +1,26 @@
 .ticker-wrapper {
   background-color: var(--primary);
   color: white;
-  overflow: hidden;
+  overflow-x: auto;
   padding: 0.75rem 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   position: relative;
   z-index: 20;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.ticker-wrapper::-webkit-scrollbar {
+  display: none;
 }
 
 .ticker-container {
   display: flex;
   gap: 3rem;
-  animation: scroll 40s linear infinite;
   white-space: nowrap;
   width: max-content;
-}
-
-.ticker-container:hover {
-  animation-play-state: paused;
+  padding: 0 1.5rem;
+  margin: 0 auto;
 }
 
 .ticker-item {
@@ -53,13 +56,4 @@
 .ticker-change.down {
   color: #f87171;
   background-color: rgba(248, 113, 113, 0.1);
-}
-
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-33.33%); /* For 3 sets of data */
-  }
 }

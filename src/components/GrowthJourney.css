@@ -24,19 +24,6 @@
   z-index: 0;
 }
 
-/* Vertical Line Fill (Animated) */
-.journey-line-fill {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  width: 4px;
-  background: linear-gradient(to bottom, #2563eb, #9333ea);
-  transform: translateX(-50%);
-  border-radius: 4px;
-  z-index: 1;
-  height: 0%; /* Will be animated */
-}
-
 .journey-steps {
   position: relative;
   z-index: 2;
@@ -101,12 +88,6 @@
   gap: 1rem;
   width: 100%;
   max-width: 350px;
-  transition: transform 0.3s;
-}
-
-.step-content:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
 .journey-step.left .step-content {
