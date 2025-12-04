@@ -1,4 +1,3 @@
-import React from 'react';
 import { Briefcase, Code2, LineChart, ShieldCheck } from 'lucide-react';
 import './FeaturesSection.css';
 
