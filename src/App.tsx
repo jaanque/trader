@@ -1,10 +1,14 @@
 import Hero from './components/Hero';
 import EconomySection from './components/EconomySection';
+import MarketTicker from './components/MarketTicker';
+import FeaturesSection from './components/FeaturesSection';
+import CTASection from './components/CTASection';
 import './App.css';
 
 function App() {
   return (
     <div className="app">
+      <MarketTicker />
       <nav className="navbar">
         <div className="container nav-container">
           <div className="logo">DevStock</div>
@@ -18,7 +22,9 @@ function App() {
       </nav>
       <main>
         <Hero />
+        <FeaturesSection />
         <EconomySection />
+        <CTASection />
       </main>
       <footer className="footer">
         <div className="container">
